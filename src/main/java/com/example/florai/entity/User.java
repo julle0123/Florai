@@ -50,4 +50,5 @@ public class User {
     @Column(name = "JOINED_AT", nullable = false)
     private Timestamp joinedAt;
 
+
 }

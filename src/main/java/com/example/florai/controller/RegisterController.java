@@ -26,7 +26,7 @@ public class RegisterController {
             return ResponseEntity.status(409).body("❌ 이미 사용 중인 ID입니다");
         }
 
-        // 사용자 정보 생성 및 저장0
+        // 사용자 정보 생성 및 저장
         User user = User.builder()
                 .id(request.getId())
                 .pw(request.getPw())
