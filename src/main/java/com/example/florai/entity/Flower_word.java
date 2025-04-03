@@ -17,11 +17,11 @@ public class Flower_word {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FW_IDX")
-    private Integer fw_idx;
+    private Integer id;
 
     @Column(name = "FW_NAME", nullable = false, length = 255)
     private String name;
 
     @Column(name = "FW_LANG", length = 255)
-    private String flw_lang;
+    private String flwLang;
 }

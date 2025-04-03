@@ -20,7 +20,7 @@ public class Flower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "FLW_IDX")
-    private Integer flw_idx;
+    private Integer id;
 
     @Column(name = "FLW_NAME", nullable = false, length = 255)
     private String name;
@@ -41,10 +41,10 @@ public class Flower {
     private Integer price;
 
     @Column(name = "FLW_LANG", length = 255)
-    private String flw_lang;
+    private String flwLang;
 
     @Column(name = "FLW_IMG", length = 1000)
-    private String flw_img;
+    private String flwLmg;
 
     @Column(name = "COLOR", length = 20)
     private String color;
@@ -53,10 +53,12 @@ public class Flower {
     private Integer stock;
 
     @Column(name = "ALLERGY")
-    private Boolean allergy;
+    private String allergy;
 
     @Column(name = "CREATED_AT", updatable = false)
     private Timestamp createdAt;
 
+    @Column(name = "FLW_SML")
+    private String flwSml;
 
 }
