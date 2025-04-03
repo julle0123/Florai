@@ -25,7 +25,7 @@ public class RecommendController {
     }
 
     @PostMapping
-    public ResponseEntity<?> handleSurvey(@RequestBody RecommendRequest request) {
+    public ResponseEntity<Map<String, Object>> handleSurvey(@RequestBody RecommendRequest request) {
         List<String> queryParams = request.getQuery();
         String[] queryArray = queryParams.toArray(new String[0]);
 
@@ -36,32 +36,30 @@ public class RecommendController {
             return ResponseEntity.badRequest().body(aiResult);
         }
 
-        // indexes: [{ idx: 140, reason: "..." }, ...]
         List<Map<String, Object>> indexes = (List<Map<String, Object>>) aiResult.get("indexes");
 
         if (indexes == null || indexes.isEmpty()) {
             return ResponseEntity.ok(Map.of(
-                    "expanded_query", aiResult.getOrDefault("expanded_query", queryArray),
+                    "expanded_query", aiResult.getOrDefault("expanded_query", String.join(", ", queryArray)),
                     "emotion_category", aiResult.getOrDefault("emotion_category", ""),
                     "recommendations", Collections.emptyList()
             ));
         }
 
-        // AI가 추천한 꽃 ID 리스트
+        // 추천된 꽃 ID 리스트 및 이유 매핑
         List<Integer> flwIdxList = indexes.stream()
                 .map(entry -> ((Number) entry.get("idx")).intValue())
                 .toList();
 
-        // ID -> reason 매핑
         Map<Integer, String> reasonMap = new HashMap<>();
         for (Map<String, Object> entry : indexes) {
             reasonMap.put(((Number) entry.get("idx")).intValue(), (String) entry.get("reason"));
         }
 
-        // DB에서 해당 꽃들 조회
+        // 꽃 DB 조회
         List<Flower> flowers = flowerRepository.findByIdIn(flwIdxList);
 
-        // AIPickRequest 기반 추천 리스트 구성
+        // JSON으로 반환할 객체 리스트 생성
         List<AIPickRequest> resultList = new ArrayList<>();
         for (Flower flower : flowers) {
             AIPickRequest pick = new AIPickRequest();
@@ -78,7 +76,7 @@ public class RecommendController {
             resultList.add(pick);
         }
 
-        // 최종 응답 구성
+        // JSON 형태 응답 구성
         Map<String, Object> finalResult = new HashMap<>();
         finalResult.put("expanded_query", aiResult.get("expanded_query"));
         finalResult.put("emotion_category", aiResult.get("emotion_category"));

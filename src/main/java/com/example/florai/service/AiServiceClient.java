@@ -16,7 +16,7 @@ public class AiServiceClient {
     public Map<String, Object> getRecommendation(String[] queryArray) {
         System.out.println("📦 프론트에서 받은 쿼리값: " + Arrays.toString(queryArray));
 
-        // Check for empty values
+        // 빈 값 체크 및 기본값 대입
         boolean hasEmpty = false;
         for (String value : queryArray) {
             if (value == null || value.trim().isEmpty()) {
@@ -28,7 +28,6 @@ public class AiServiceClient {
 
         if (hasEmpty) {
             System.out.println("⚠️ 빈 값이 있으므로 기본값으로 대체합니다.");
-            // 기본값으로 대체 (필요시)
             if (queryArray.length >= 4) {
                 if (queryArray[0] == null || queryArray[0].trim().isEmpty()) queryArray[0] = "친구";
                 if (queryArray[1] == null || queryArray[1].trim().isEmpty()) queryArray[1] = "축하";
@@ -46,41 +45,28 @@ public class AiServiceClient {
 
         System.out.println("📨 AI 서버로 보낼 requestBody: " + requestBody);
 
-        // 요청 헤더 구성
+        // 요청 헤더
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(requestBody, headers);
 
         try {
-            // POST 요청
+            // POST 요청 전송
             ResponseEntity<String> response = restTemplate.postForEntity(API_URL, entity, String.class);
 
             if (response.getStatusCode() == HttpStatus.OK) {
-                // 응답 본문 파싱
+                // 응답 파싱
                 JsonNode json = objectMapper.readTree(response.getBody());
                 System.out.println("🧾 AI 서버 응답 전체 JSON:\n" + json.toPrettyString());
 
-                // 결과 맵 생성
                 Map<String, Object> result = new HashMap<>();
 
-                // 확장된 쿼리 및 감정 카테고리
-                String expandedQuery = json.path("expanded_query").asText();
-                String emotionCategory = json.path("emotion_category").asText();
+                // ✅ 응답이 배열인 경우 (즉시 추천 리스트)
+                if (json.isArray()) {
+                    List<Map<String, Object>> indexes = new ArrayList<>();
 
-                System.out.println("🧠 확장된 쿼리: " + expandedQuery);
-                System.out.println("💖 감정 카테고리: " + emotionCategory);
-
-                result.put("expanded_query", expandedQuery);
-                result.put("emotion_category", emotionCategory);
-
-                // 추천 인덱스 파싱
-                List<Map<String, Object>> indexes = new ArrayList<>();
-                JsonNode indexesNode = json.path("indexes");
-
-                if (indexesNode.isArray()) {
-                    for (JsonNode item : indexesNode) {
+                    for (JsonNode item : json) {
                         Map<String, Object> indexMap = new HashMap<>();
-                        // FLW_IDX 또는 idx 필드 찾기
                         int flwIdx = item.has("FLW_IDX") ? item.path("FLW_IDX").asInt() :
                                 (item.has("idx") ? item.path("idx").asInt() : 0);
 
@@ -93,13 +79,17 @@ public class AiServiceClient {
                         indexMap.put("reason", item.path("reason").asText());
                         indexes.add(indexMap);
                     }
-                } else {
-                    System.out.println("⚠️ indexes 필드가 배열이 아닙니다!");
-                }
 
-                System.out.println("🌸 추천된 꽃 리스트 (indexes): " + indexes);
-                result.put("indexes", indexes);
-                return result;
+                    System.out.println("🌸 추천된 꽃 리스트 (indexes): " + indexes);
+                    result.put("indexes", indexes);
+                    result.put("expanded_query", String.join(" ", queryArray)); // 기본값
+                    result.put("emotion_category", ""); // 기본값
+                    return result;
+
+                } else {
+                    System.out.println("⚠️ AI 응답이 배열이 아닙니다!");
+                    return Map.of("error", "AI 응답 형식이 잘못되었습니다.");
+                }
 
             } else {
                 System.out.println("❌ AI 서버 응답 실패: " + response.getStatusCode());
