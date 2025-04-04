@@ -23,7 +23,7 @@ public class RegisterController {
 
         // ID 중복 체크
         if (userRepository.existsById(request.getId())) {
-            return ResponseEntity.status(409).body("❌ 이미 사용 중인 ID입니다");
+            return ResponseEntity.status(409).body("이미 사용 중인 ID입니다");
         }
 
         // 사용자 정보 생성 및 저장
@@ -40,6 +40,6 @@ public class RegisterController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok("✅ 회원가입 성공!");
+        return ResponseEntity.ok("회원가입 성공!");
     }
 }

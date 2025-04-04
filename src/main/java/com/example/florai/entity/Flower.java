@@ -25,43 +25,43 @@ public class Flower {
     @Column(name = "FLW_NAME", length = 255, nullable = false)
     private String name;
 
-    @Column(name = "SPRING")
+    @Column(name = "SPRING", nullable = false)
     private Boolean spring;
 
-    @Column(name = "SUMMER")
+    @Column(name = "SUMMER", nullable = false)
     private Boolean summer;
 
-    @Column(name = "FALL")
+    @Column(name = "FALL", nullable = false)
     private Boolean fall;
 
-    @Column(name = "WINTER")
+    @Column(name = "WINTER", nullable = false)
     private Boolean winter;
 
     @Column(name = "PRICE", nullable = false)
     private Integer price;
 
-    @Column(name = "FLW_LANG", length = 255)
+    @Column(name = "FLW_LANG", length = 255, nullable = false)
     private String flwLang;
 
-    @Column(name = "FLW_IMG", length = 1000)
+    @Column(name = "FLW_IMG", length = 1000, nullable = false)
     private String flwLmg;
 
-    @Column(name = "COLOR", length = 20)
+    @Column(name = "COLOR", length = 20, nullable = false)
     private String color;
 
-    @Column(name = "STOCK")
+    @Column(name = "STOCK", nullable = false)
     private Integer stock;
 
-    @Column(name = "ALLERGY")
+    @Column(name = "ALLERGY", nullable = false, length = 1)
     private String allergy;
 
-    @Column(name = "CREATED_AT", updatable = false)
+    @Column(name = "CREATED_AT", updatable = false, nullable = false)
     private Timestamp createdAt;
 
-    @Column(name = "FLW_SML")
+    @Column(name = "FLW_SML", nullable = false, length = 255)
     private String flwSml;
 
-    @Column(name = "SITUATION")
+    @Column(name = "SITUATION", nullable = false, length = 30)
     private String situation;
 
 }

@@ -14,20 +14,20 @@ public class AiServiceClient {
     private final String API_URL = "https://florai-ttyw.onrender.com/recommend";
 
     public Map<String, Object> getRecommendation(String[] queryArray) {
-        System.out.println("📦 프론트에서 받은 쿼리값: " + Arrays.toString(queryArray));
+        System.out.println("프론트에서 받은 쿼리값: " + Arrays.toString(queryArray));
 
         // 빈 값 체크 및 기본값 대입
         boolean hasEmpty = false;
         for (String value : queryArray) {
             if (value == null || value.trim().isEmpty()) {
                 hasEmpty = true;
-                System.out.println("⚠️ 빈 값 발견됨!");
+                System.out.println("빈 값 발견됨!");
                 break;
             }
         }
 
         if (hasEmpty) {
-            System.out.println("⚠️ 빈 값이 있으므로 기본값으로 대체합니다.");
+            System.out.println("빈 값이 있으므로 기본값으로 대체합니다.");
             if (queryArray.length >= 4) {
                 if (queryArray[0] == null || queryArray[0].trim().isEmpty()) queryArray[0] = "친구";
                 if (queryArray[1] == null || queryArray[1].trim().isEmpty()) queryArray[1] = "축하";
@@ -43,7 +43,7 @@ public class AiServiceClient {
         Map<String, Object> requestBody = new HashMap<>();
         requestBody.put("query", queryArray);
 
-        System.out.println("📨 AI 서버로 보낼 requestBody: " + requestBody);
+        System.out.println("AI 서버로 보낼 requestBody: " + requestBody);
 
         // 요청 헤더
         HttpHeaders headers = new HttpHeaders();
@@ -57,11 +57,11 @@ public class AiServiceClient {
             if (response.getStatusCode() == HttpStatus.OK) {
                 // 응답 파싱
                 JsonNode json = objectMapper.readTree(response.getBody());
-                System.out.println("🧾 AI 서버 응답 전체 JSON:\n" + json.toPrettyString());
+                System.out.println("AI 서버 응답 전체 JSON:\n" + json.toPrettyString());
 
                 Map<String, Object> result = new HashMap<>();
 
-                // ✅ 응답이 배열인 경우 (즉시 추천 리스트)
+                //  응답이 배열인 경우 (즉시 추천 리스트)
                 if (json.isArray()) {
                     List<Map<String, Object>> indexes = new ArrayList<>();
 
@@ -71,7 +71,7 @@ public class AiServiceClient {
                                 (item.has("idx") ? item.path("idx").asInt() : 0);
 
                         if (flwIdx == 0) {
-                            System.out.println("⚠️ 꽃 인덱스가 0이거나 없습니다: " + item.toPrettyString());
+                            System.out.println("꽃 인덱스가 0이거나 없습니다: " + item.toPrettyString());
                             continue;
                         }
 
@@ -80,25 +80,25 @@ public class AiServiceClient {
                         indexes.add(indexMap);
                     }
 
-                    System.out.println("🌸 추천된 꽃 리스트 (indexes): " + indexes);
+                    System.out.println("추천된 꽃 리스트 (indexes): " + indexes);
                     result.put("indexes", indexes);
                     result.put("expanded_query", String.join(" ", queryArray)); // 기본값
                     result.put("emotion_category", ""); // 기본값
                     return result;
 
                 } else {
-                    System.out.println("⚠️ AI 응답이 배열이 아닙니다!");
+                    System.out.println("AI 응답이 배열이 아닙니다!");
                     return Map.of("error", "AI 응답 형식이 잘못되었습니다.");
                 }
 
             } else {
-                System.out.println("❌ AI 서버 응답 실패: " + response.getStatusCode());
+                System.out.println(" AI 서버 응답 실패: " + response.getStatusCode());
                 return Map.of("error", "AI 서버 응답 실패: " + response.getStatusCode());
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("❌ 예외 발생: " + e.getMessage());
+            System.out.println("예외 발생: " + e.getMessage());
             return Map.of("error", "예외 발생: " + e.getMessage());
         }
     }
