@@ -3,7 +3,6 @@ package com.example.florai.controller;
 import com.example.florai.dto.ProductList;
 import com.example.florai.entity.Flower;
 import com.example.florai.repository.FlowerRepository;
-import com.example.florai.dto.RecommendRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

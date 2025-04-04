@@ -24,4 +24,7 @@ public class Flower_word {
 
     @Column(name = "FW_LANG", length = 255)
     private String flwLang;
+
+    @Column(name = "FW_IMG", length = 1000)
+    private String img;
 }
