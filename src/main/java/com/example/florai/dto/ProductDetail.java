@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AIPickRequest {
-    private Integer id;
+public class ProductDetail {
+    private int id;
     private String name;
     private Boolean spring;
     private Boolean summer;
@@ -15,6 +15,8 @@ public class AIPickRequest {
     private String allergy;
     private String flwLang;
     private String flwSml;
+    private String situation;
+    private int price;
     private String image;
-    private String reason; // FastAPI에서 받은 추천 이유
+
 }

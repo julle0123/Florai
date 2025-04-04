@@ -72,6 +72,7 @@ public class RecommendController {
             pick.setAllergy(flower.getAllergy());
             pick.setFlwLang(flower.getFlwLang());
             pick.setFlwSml(flower.getFlwSml());
+            pick.setImage(flower.getFlwLmg());
             pick.setReason(reasonMap.get(flower.getId()));
             resultList.add(pick);
         }

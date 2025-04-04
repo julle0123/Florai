@@ -22,7 +22,7 @@ public class Flower {
     @Column(name = "FLW_IDX")
     private Integer id;
 
-    @Column(name = "FLW_NAME", nullable = false, length = 255)
+    @Column(name = "FLW_NAME", length = 255, nullable = false)
     private String name;
 
     @Column(name = "SPRING")
@@ -60,5 +60,8 @@ public class Flower {
 
     @Column(name = "FLW_SML")
     private String flwSml;
+
+    @Column(name = "SITUATION")
+    private String situation;
 
 }

@@ -10,7 +10,7 @@ public class JwtUtil {
     private static final String SECRET_KEY = "YourSecretKeyForJwtSigning";
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 2; // 2시간
 
-    // ✅ 토큰 생성
+    // 토큰 생성
     public String generateToken(String userId) {
         return Jwts.builder()
                 .setSubject(userId)
@@ -20,7 +20,7 @@ public class JwtUtil {
                 .compact();
     }
 
-    // ✅ 토큰 검증
+    // 토큰 검증
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
@@ -30,7 +30,7 @@ public class JwtUtil {
         }
     }
 
-    // ✅ 토큰에서 사용자 ID 추출
+    // 토큰에서 사용자 ID 추출
     public String getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
