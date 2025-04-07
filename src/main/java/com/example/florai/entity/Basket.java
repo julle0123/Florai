@@ -23,7 +23,7 @@ public class Basket {
     private Integer basketIdx;
 
     @Column(name = "ID", length = 50, nullable = false)
-    private String userId;
+    private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FLW_IDX") // T_BASKET의 FLW_IDX -> T_FLOWER의 FLW_IDX
