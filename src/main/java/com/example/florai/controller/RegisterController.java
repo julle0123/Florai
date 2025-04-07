@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@RestController // ✅ 핵심: JSON 응답을 기본으로 하는 컨트롤러
+@RestController // 핵심: JSON 응답을 기본으로 하는 컨트롤러
 @RequiredArgsConstructor
 @RequestMapping("/Signup")
 public class RegisterController {
@@ -19,7 +19,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
-        System.out.println("✅ RegisterRequest: " + request); // null이면 문제 있음
+        System.out.println("RegisterRequest: " + request); // null이면 문제 있음
 
         // ID 중복 체크
         if (userRepository.existsById(request.getId())) {

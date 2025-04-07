@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor // Lombok → 기본 생성자 자동 생성
 @AllArgsConstructor // Lombok → 모든 필드 포함 생성자 자동 생성
 @ToString
-public class ANNIVERSARY {
+public class Anniversary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

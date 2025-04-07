@@ -20,13 +20,14 @@ public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "BASKET_IDX", nullable = false)
-    private Integer basketidx;
+    private Integer basketIdx;
 
     @Column(name = "ID", length = 50, nullable = false)
-    private String id;
+    private String userId;
 
-    @Column(name = "FLW_IDX", nullable = false)
-    private Integer flwidx;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FLW_IDX") // T_BASKET의 FLW_IDX -> T_FLOWER의 FLW_IDX
+    private Flower flower;
 
     @Column(name = "CNT", nullable = false)
     private Integer cnt;

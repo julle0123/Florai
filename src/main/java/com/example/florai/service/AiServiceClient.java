@@ -28,11 +28,12 @@ public class AiServiceClient {
 
         if (hasEmpty) {
             System.out.println("빈 값이 있으므로 기본값으로 대체합니다.");
-            if (queryArray.length >= 4) {
+            if (queryArray.length >= 5) {
                 if (queryArray[0] == null || queryArray[0].trim().isEmpty()) queryArray[0] = "친구";
                 if (queryArray[1] == null || queryArray[1].trim().isEmpty()) queryArray[1] = "축하";
                 if (queryArray[2] == null || queryArray[2].trim().isEmpty()) queryArray[2] = "생일";
                 if (queryArray[3] == null || queryArray[3].trim().isEmpty()) queryArray[3] = "은은하게";
+                if (queryArray[4] == null || queryArray[4].trim().isEmpty()) queryArray[4] = "은은하게";
             }
         }
 
