@@ -1,49 +1,54 @@
 package com.example.florai.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.sql.Timestamp;
 
-@Entity // JPA가 관리하는 엔티티 클래스
+@Entity
 @Table(name = "T_ORDER")
 @Data
-@Getter // Lombok → getter 자동 생성
-@Setter // Lombok → setter 자동 생성
 @Builder
-@NoArgsConstructor // Lombok → 기본 생성자 자동 생성
-@AllArgsConstructor // Lombok → 모든 필드 포함 생성자 자동 생성
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_IDX", nullable = false)
+    @Column(name = "ORDER_IDX")
     private Integer orderId;
 
-    @Column(name = "ID", length = 50, nullable = false)
-    private String id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ID", nullable = false)
+    private User user; // 회원 ID
 
-    @Column(name = "TOTAL_AMOUNT", nullable = false)
-    private Integer totalAmount;
+    @Column(name = "NICK", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "DISCOUNT_AMOUNT", nullable = false)
-    private Integer discountAmount;
+    @Column(name = "FLW_NAME", nullable = false, length = 255)
+    private String flwName;
 
-    @Column(name = "PAY_AMOUNT", nullable = false)
-    private Integer payAmount;
-
-    @Column(name = "PAY_METHOD", length = 10, nullable = false)
+    @Column(name = "PAY_METHOD", nullable = false, length = 10)
     private String payMethod;
 
-    @Column(name = "PAID_AMOUNT", nullable = false)
-    private Integer paidAmount;
+    @Column(name = "MERCHANT_UID", nullable = false, length = 100)
+    private String merchantUid;
 
-    @Column(name = "ORDER_ST", length = 20, nullable = false)
-    private String orderSt;
+    @Column(name = "TOTAL_PRICE", nullable = false)
+    private Integer totalPrice;
 
-    @Column(name = "ORDERED_AT", nullable = false)
-    private Timestamp orderedAt;
+    @Column(name = "ADDR", nullable = false, length = 600)
+    private String addr;
 
+    @Column(name="DETAIL_ADDR", nullable = false, length = 255)
+    private String detailAddr;
+
+    @Column(name = "PHONE", nullable = false, length = 20)
+    private String phone;
+
+    @Column(name = "CREATED_AT", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createdAt;
+
+    @Column(name = "PAYMENT_STATUS", nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
+    private Boolean paymentStatus;
 }

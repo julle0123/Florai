@@ -26,7 +26,7 @@ public class Basket {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FLW_IDX") // T_BASKET의 FLW_IDX -> T_FLOWER의 FLW_IDX
+    @JoinColumn(name = "FLW_IDX", nullable = false) // T_BASKET의 FLW_IDX -> T_FLOWER의 FLW_IDX
     private Flower flower;
 
     @Column(name = "CNT", nullable = false)
