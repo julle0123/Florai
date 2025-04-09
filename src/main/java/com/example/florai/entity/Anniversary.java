@@ -2,17 +2,14 @@ package com.example.florai.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.View;
 
-@Entity // JPA가 관리하는 엔티티 클래스
+@Entity
 @Table(name = "V_ANNIVERSARY_DDAY")
-@Data
-@Getter // Lombok → getter 자동 생성
-@Setter // Lombok → setter 자동 생성
+@Getter
+@Setter
 @Builder
-@NoArgsConstructor // Lombok → 기본 생성자 자동 생성
-@AllArgsConstructor // Lombok → 모든 필드 포함 생성자 자동 생성
-@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Anniversary {
 
     @Id

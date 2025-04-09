@@ -13,6 +13,7 @@ public class ProductDetail {
     private Boolean fall;
     private Boolean winter;
     private String allergy;
+    private String color;
     private String flwLang;
     private String flwSml;
     private String situation;

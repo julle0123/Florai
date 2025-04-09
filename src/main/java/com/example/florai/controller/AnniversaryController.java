@@ -1,12 +1,10 @@
 package com.example.florai.controller;
 
-import com.example.florai.dto.AnniversayRequset;
+import com.example.florai.dto.AnniversaryResponse;
 import com.example.florai.entity.Anniversary;
 import com.example.florai.repository.AnniversaryRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,12 +20,12 @@ public class AnniversaryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AnniversayRequset>> GetAllAnniversary() {
+    public ResponseEntity<List<AnniversaryResponse>> getAllAnniversary() {
         List<Anniversary> anniversaries = anniversaryRepository.findAll();
 
-        List<AnniversayRequset> anniversayRequsets = anniversaries.stream()
-                .map(anniversary ->{
-                    AnniversayRequset dto = new AnniversayRequset();
+        List<AnniversaryResponse> responses = anniversaries.stream()
+                .map(anniversary -> {
+                    AnniversaryResponse dto = new AnniversaryResponse();
                     dto.setAnniversaryId(anniversary.getAnniversaryId());
                     dto.setAnniversaryName(anniversary.getAnniversaryName());
                     dto.setAnniversaryDesc(anniversary.getAnniversaryDesc());
@@ -37,6 +35,7 @@ public class AnniversaryController {
                     return dto;
                 })
                 .collect(Collectors.toList());
-        return ResponseEntity.ok(anniversayRequsets);
+
+        return ResponseEntity.ok(responses);
     }
 }

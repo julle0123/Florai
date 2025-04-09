@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AnniversayRequset {
+public class AnniversaryResponse {
     private Integer anniversaryId;
     private String anniversaryName;
     private String anniversaryDesc;

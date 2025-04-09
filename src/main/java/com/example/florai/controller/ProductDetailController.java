@@ -37,6 +37,7 @@ public class ProductDetailController {
         dto.setFall(flower.getFall());
         dto.setWinter(flower.getWinter());
         dto.setAllergy(flower.getAllergy());
+        dto.setColor(flower.getColor());
         dto.setFlwLang(flower.getFlwLang());
         dto.setFlwSml(flower.getFlwSml());
         dto.setSituation(flower.getSituation());
