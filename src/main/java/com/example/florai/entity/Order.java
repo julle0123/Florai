@@ -50,5 +50,5 @@ public class Order {
     private Timestamp createdAt;
 
     @Column(name = "PAYMENT_STATUS", nullable = false, columnDefinition = "TINYINT(1) DEFAULT 0")
-    private Boolean paymentStatus;
+    private Integer paymentStatus;
 }

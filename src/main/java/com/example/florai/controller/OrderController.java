@@ -43,7 +43,7 @@ public class OrderController {
     @PostMapping("/{orderId}/payment-success")
     public ResponseEntity<?> paymentSuccess(@PathVariable Integer orderId) {
         Order order = orderService.getOrder(orderId);
-        orderService.updatePaymentStatus(order, true);
+        orderService.updatePaymentStatus(order, 0);
 
         return ResponseEntity.ok("결제 완료 및 주문 상태 업데이트 성공");
     }

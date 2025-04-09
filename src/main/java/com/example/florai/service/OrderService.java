@@ -1,5 +1,6 @@
 package com.example.florai.service;
 
+import com.example.florai.dto.OrderDetailResponse;
 import com.example.florai.dto.OrderRequest;
 import com.example.florai.entity.Basket;
 import com.example.florai.entity.Order;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +38,7 @@ public class OrderService {
                 .detailAddr(orderRequest.getDetailAddr())
                 .phone(orderRequest.getPhone())
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
-                .paymentStatus(false)
+                .paymentStatus(0)
                 .build();
 
         return orderRepository.save(order);
@@ -58,13 +60,36 @@ public class OrderService {
     }
 
     @Transactional
-    public void updatePaymentStatus(Order order, boolean status) {
+    public void updatePaymentStatus(Order order, Integer status) {
         order.setPaymentStatus(status);
         orderRepository.save(order);
 
-        // ✅ 장바구니 상품 삭제
+        // 장바구니 상품 삭제
         String userId = order.getUser().getId();
         List<Basket> baskets = basketRepository.findById(userId);
         basketRepository.deleteAll(baskets);
+    }
+
+    // 사용자별 주문 목록 조회 (수정 완료)
+    @Transactional(readOnly = true)
+    public List<OrderDetailResponse> getOrdersByUserId(String userId) {
+        List<Order> orders = orderRepository.findAllByUser_Id(userId);
+
+        return orders.stream()
+                .map(order -> new OrderDetailResponse(
+                        order.getOrderId(),
+                        order.getUser().getId(),
+                        order.getUser().getNick(),
+                        order.getFlwName(),
+                        order.getPayMethod(),
+                        order.getMerchantUid(),
+                        order.getTotalPrice(),
+                        order.getAddr(),
+                        order.getDetailAddr(),
+                        order.getPhone(),
+                        order.getCreatedAt(),
+                        order.getPaymentStatus()
+                ))
+                .collect(Collectors.toList());
     }
 }

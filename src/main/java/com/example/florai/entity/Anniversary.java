@@ -2,9 +2,10 @@ package com.example.florai.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.View;
 
 @Entity // JPA가 관리하는 엔티티 클래스
-@Table(name = "T_ANNIVERSARY")
+@Table(name = "V_ANNIVERSARY_DDAY")
 @Data
 @Getter // Lombok → getter 자동 생성
 @Setter // Lombok → setter 자동 생성
@@ -17,17 +18,20 @@ public class Anniversary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ANNI_IDX", nullable = false)
-    private Integer anniversaryid;
+    private Integer anniversaryId;
 
     @Column(name = "ANNI_NAME", nullable = false, length = 255)
-    private String anniversaryname;
+    private String anniversaryName;
 
     @Column(name = "ANNI_DESC", nullable = false)
-    private String anniversarydesc;
+    private String anniversaryDesc;
 
     @Column(name = "MONTH", nullable = false)
     private Integer month;
 
     @Column(name = "DAY", nullable = false)
     private Integer day;
+
+    @Column(name = "D_DAY", nullable = false)
+    private Integer dDay;
 }
