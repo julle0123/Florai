@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController // 핵심: JSON 응답을 기본으로 하는 컨트롤러
 @RequiredArgsConstructor
@@ -42,4 +43,11 @@ public class RegisterController {
 
         return ResponseEntity.ok("회원가입 성공!");
     }
+    // 아이디 중복 확인
+    @GetMapping("/checkId")
+    public ResponseEntity<Map<String, Boolean>> checkId(@RequestParam String id) {
+        boolean exists = userRepository.existsById(id);
+        return ResponseEntity.ok(Map.of("available", !exists));
+    }
+
 }

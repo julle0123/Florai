@@ -11,7 +11,7 @@ import java.util.*;
 @Service
 public class AiServiceClient {
 
-    private final String API_URL = "https://florai-ttyw.onrender.com/recommend";
+    private final String API_URL = "https://florai-v8jz.onrender.com/recommend";
 
     public Map<String, Object> getRecommendation(String[] queryArray) {
         System.out.println("프론트에서 받은 쿼리값: " + Arrays.toString(queryArray));
