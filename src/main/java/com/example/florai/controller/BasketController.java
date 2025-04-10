@@ -66,6 +66,7 @@ public class BasketController {
         }
 
         Integer newCount = (Integer) body.get("count");
+        
         Basket updatedBasket = basketService.updateBasketCount(basketIdx, newCount);
 
         return ResponseEntity.ok(Map.of(
