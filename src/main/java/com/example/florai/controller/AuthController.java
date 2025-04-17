@@ -62,7 +62,6 @@ public class AuthController {
         if (!jwtUtil.validateToken(token)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 토큰");
         }
-
         String userId = jwtUtil.getUserIdFromToken(token);
         return ResponseEntity.ok("안녕하세요 " + userId + "님!");
     }
