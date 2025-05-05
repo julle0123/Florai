@@ -50,9 +50,7 @@
 ## ⚙ 시스템 아키텍처(구조)
 ![image](https://github.com/user-attachments/assets/43de95b0-198f-40ba-aff9-0973f5e87ee3)
 ---
-## 📌 SW유스케이스
 
----
 ## 📌 서비스 흐름도
 ![image](https://github.com/user-attachments/assets/dbb404b6-08bd-4216-88ad-62cf8815747a)
 
@@ -61,16 +59,17 @@
 ![image](https://github.com/user-attachments/assets/74cb9c17-1bd0-423f-a08f-d99c35e416cc)
 ---
 
-## 🖥 화면 구성
-
+🖥 화면 구성
+<table> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/213a9bbc-761c-444a-aa2a-b77a1d668b64" width="200"/><br/>Main </td> <td align="center"> <img src="https://github.com/user-attachments/assets/51009a12-8202-4249-a2ac-0a0ba6e6a425" width="200"/><br/>꽃말도감 </td> <td align="center"> <img src="https://github.com/user-attachments/assets/d6a42671-4d3e-414d-9be8-b0cec9e96d31" width="200"/><br/>Shop </td> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/b9076dec-9ff5-47c4-9686-9c38954989d9" width="200"/><br/>기념일 </td> <td align="center"> <img src="https://github.com/user-attachments/assets/f476a419-4d34-4609-80ce-d90b0ce8788a" width="200"/><br/>로그인 </td> <td align="center"> <img src="https://github.com/user-attachments/assets/8c724ad5-9390-423d-b4b8-db356f1eed9c" width="200"/><br/>회원가입 </td> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/b39aec6e-0db3-40ce-a13e-285646d67e28" width="200"/><br/>상품정보 </td> <td align="center"> <img src="https://github.com/user-attachments/assets/d0d2a91b-85ca-4f4f-b23b-bbd03912d1e9" width="200"/><br/>장바구니 </td> <td align="center"> <img src="https://github.com/user-attachments/assets/8a2696b7-3971-4151-af7c-b79d53937e35" width="200"/><br/>추천 설문 </td> </tr> <tr> <td align="center" colspan="3"> <img src="https://github.com/user-attachments/assets/9b4a82ef-5414-4b07-a887-f5dce0c6d8db" width="200"/><br/>추천 결과 </td> </tr> </table>
 
 ## 👨‍👩‍👦‍👦 팀원 역할
 
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| 전호원 | 팀장, 기획, Front-end, DB 설계 및 구축 | [GitHub](https://github.com/사용자ID) |
-| 이석현 | 데이터 수집, 크롤링, AI 추천 모델링 | [GitHub](https://github.com/사용자ID) |
+| 전호원 | 팀장, 기획, Front-end, DB 설계 및 구축 | [GitHub](https://github.com/howon-Jeon/FlorAi_Project) |
+| 이석현 | 데이터 수집, 크롤링, AI 추천 모델링 | [GitHub](https://github.com/lsh7897/florAI) |
 | 김성하 | Back-end 개발, DB 설계 및 구축 | [GitHub](https://github.com/julle0123/Florai) |
+
 
 ---
 
