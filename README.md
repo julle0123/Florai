@@ -24,7 +24,7 @@
 ---
 ## 동작 구조
 1. 프론트 → 백엔드(Spring)로 질문 키워드 전송 (JSON)
-2. 백엔드 → Python FastAPI 추천 서버에 전달
+2. 백엔드 → Spring boot가 질문 키워드(JSON)을 받아 Python 서버에 전달
 3. Python 서버 → LangChain으로 문장 3개 확장(desc/emotion/meaning)
 4. 각 문장을 text-embedding-3-small로 임베딩 → Qdrant에서 유사도 검색
 5. Top 10 추출 → 유사 그룹화 + 랜덤 추출 → 3개 선택 → GPT로 추천 이유 생성
